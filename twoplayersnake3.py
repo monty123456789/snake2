@@ -18,11 +18,7 @@ wn.bgcolor('green')
 wn.setup(width=600, height=600)
 #wn.tracer(0)
 
-food = turtle.Turtle()
-food.speed(0)
-food.shape('circle')
-food.color('red')
-food.penup()
+
 
 
 class Snake:
@@ -35,7 +31,7 @@ class Snake:
         self.head.pensize(2)
         self.head.speed(0)#
         self.head.goto(goto)
-        self.distance = 50
+        self.distance = 10
         self.turn = 90
 
      
@@ -79,6 +75,21 @@ class Snake:
 
     def change(self):
         self.head.color('red')
+
+    def food_c(self):
+        self.food = turtle.Turtle()
+        self.food.speed(0)
+        self.food.shape('circle')
+        self.food.color('red')
+        self.food.penup()
+        self.food.goto(0,0)
+        self.random = random
+        #self.food = food
+        if self.head.distance(self.food) < 20:
+            self.food.color('black')
+            y = self.random.randint(-290, 290)
+            x = self.random.randint(-290, 290)
+            self.food.goto(x,y)
     
     #def main(self):
         #self.sc.mainloop()
@@ -93,6 +104,7 @@ while True:
     #blue.change()
     #blue.test_m()
     blue.border_c()
+    blue.food_c()
 
     #blue.border_c()
     #d = Snake((40,40), 'red', 'Left')
