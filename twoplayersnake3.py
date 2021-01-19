@@ -1,5 +1,5 @@
 from turtle import Turtle, Screen
-
+import turtle
 import time
 import random
 
@@ -18,9 +18,15 @@ wn.bgcolor('green')
 wn.setup(width=600, height=600)
 #wn.tracer(0)
 
+food = turtle.Turtle()
+food.speed(0)
+food.shape('circle')
+food.color('red')
+food.penup()
+
 
 class Snake:
-    def __init__(self, goto, color, forward_key, back_key, left_key, right_key):
+    def __init__(self, goto, color):
         self.head = Turtle()
         #super().__init__(shape='square')
         self.head.color(color)
@@ -29,11 +35,11 @@ class Snake:
         self.head.pensize(2)
         self.head.speed(0)#
         self.head.goto(goto)
-        self.distance = 5
+        self.distance = 50
         self.turn = 90
 
-      
-
+     
+    def move(self,forward_key, back_key, left_key, right_key):
         self.sc = Screen()
         self.sc.listen()
 
@@ -58,23 +64,43 @@ class Snake:
     def right(self):
         self.head.right(self.turn)
 
- 
+    def border_c(self):
+        if self.head.xcor()>290 or self.head.xcor()<-290 or self.head.ycor()>290 or self.head.ycor()<-290:
 
-    #def change(self):
-        #self.color('red')
+            #time.sleep(1)
+            #self.head.color('black')
+            self.head.goto(0,0)
+        
+            self.head.direction = 'stop'
+ 
+    def test_m(self):
+        #x = self.head.xcor()
+        self.head.setx(self.head.xcor() + 100)
+
+    def change(self):
+        self.head.color('red')
     
     #def main(self):
         #self.sc.mainloop()
+blue = Snake((20,20), 'blue')
 
 while True:
+
     wn.update()
-    blue = Snake((20,20), 'blue', 'Up', 'Down', 'Left', 'Right')
-    red = Snake((20, -20), 'red', 'w', 's', 'a', 'd')
+
+    #red = Snake((20, -20), 'red', 'w', 's', 'a', 'd')
+    blue.move('Up', 'Down', 'Left', 'Right')
+    #blue.change()
+    #blue.test_m()
+    blue.border_c()
+
+    #blue.border_c()
     #d = Snake((40,40), 'red', 'Left')
     #d.main()
     #t = Snake((40,40), 'red')
     #draw.main()
-    wn.mainloop()
+    
+wn.mainloop()
     #draw.main()
 
 
