@@ -17,7 +17,7 @@ class MyTurtle(Turtle):
         self.penup()
         self.goto(goto)
         self.shape('square') = head
-        self.head = head
+        self.head = heads
         #self.shape = head
         #self.pensize(pensize)
         #self.speed(speed)   
