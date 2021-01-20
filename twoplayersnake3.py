@@ -34,7 +34,7 @@ high_score = 0
 ##
 
 class Snake:
-    def __init__(self, goto, color, player, setx, sety):
+    def __init__(self, goto, color, player, setx, sety, foodgoto):
         self.head = Turtle()
         #super().__init__(shape='square')
         self.head.color(color)
@@ -47,10 +47,12 @@ class Snake:
         self.turn = 90
 
         self.food = turtle.Turtle()
+        self.food.penup()
+
+        self.food.goto(foodgoto)
         self.food.speed(0)
         self.food.shape('circle')
-        self.food.color('red')
-        self.food.penup()
+        self.food.color(color)
 
         #self.score = score
         self.score = 0
@@ -141,13 +143,18 @@ class Snake:
 
             self.pen.write('Player {}  Score: {}'.format(self.player, self.score), align='center', font=('courier', 24, 'normal'))
             
-
+            if self.score > 5:
+                #self.pen.clear()
+                self.pen.goto(0,0)
+                self.pen.color('black')
+                self.pen.write('Player {}  is the winner!'.format(self.player), align='center', font=('courier', 30, 'bold'))
+                wn.mainloop()
             #self.pen.clear()
     #def main(self):
         #self.sc.mainloop()
-yellow = Snake((-20,20), 'yellow', '1', -150, 260)
+yellow = Snake((-20,20), 'yellow', '1', -150, 260, (100, 0))
 
-blue = Snake((20,20), 'blue', '2', 150, 260)
+blue = Snake((20,20), 'blue', '2', 150, 260, (-100, 0))
 
 while True:
 
