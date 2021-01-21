@@ -37,18 +37,21 @@ class Snake:
     def __init__(self, goto, color, player, setx, sety, foodgoto):
         self.head = Turtle()
         #super().__init__(shape='square')
-        self.head.color('white')
-        
+        self.head.color(color)
+
         #self.head._outlinewidth(2)
-        self.head.fillcolor(color)
+        self.head.fillcolor('white')
+        self.head.shapesize(outline=10)
         self.head.shape('square')
-        self.head.penup()
-        self.head.pensize(10)
+        #self.head.pencolor('white')
+        #self.head.penup()
+        self.head.pensize(1)
         #self.head.shapesize(2,2,2)
         self.head.speed(0)
         self.head.goto(goto)
         self.distance = 10
         self.head.direction = 'stop'
+        
         #self.turn = 90
 
         self.food = turtle.Turtle()
@@ -76,6 +79,7 @@ class Snake:
         self.pen.speed(0)
         self.pen.shape('square')
         self.pen.color('white')
+        self.pen.pensize()
         self.pen.penup()
         self.pen.hideturtle()
         self.pen.goto(setx, sety)
@@ -84,7 +88,7 @@ class Snake:
 
         self.pen.write('Player {}  Score: {}'.format(self.player, self.score), align='center', font=('courier', 24, 'normal'))
 
-    
+   
     
     def move(self, left_key, right_key, up_key, down_key):
         #self.head.speed()
@@ -141,7 +145,7 @@ class Snake:
 
     def border_c(self):
         if self.head.xcor()>290 or self.head.xcor()<-290 or self.head.ycor()>290 or self.head.ycor()<-290:
-            
+            self.head.pensize(1)
             
 
             #self.head.speed(0)
@@ -178,7 +182,9 @@ class Snake:
         self.random = random
         #self.food = food
         if self.head.distance(self.food) < 20 or self.head.distance(self.new_food) < 20:
-             
+            p = self.head.pensize()
+            new = p + 3
+            self.head.pensize(new)
             self.score += 10 
             self.pen.clear()
             #self.head.speed(self.head.speed-1)
@@ -198,11 +204,16 @@ class Snake:
 
             self.pen.write('Player {}  Score: {}'.format(self.player, self.score), align='center', font=('courier', 24, 'normal'))
             
-            if self.score > 45:
+            if self.score > 5:
                 #self.pen.clear()
                 self.pen.goto(0,0)
-                self.pen.color('black')
-                self.pen.write('Player {}  is the winner!'.format(self.player), align='center', font=('courier', 30, 'bold'))
+                
+                
+                self.pen.color('white')
+                self.pen.fillcolor('black')
+                self.pen.shapesize(outline=20)
+
+                self.pen.write('Player {}  is the winner!'.format(self.player), align='center', font=('courier', 40, 'bold'))
                 wn.mainloop()
             #self.pen.clear()
             # 
