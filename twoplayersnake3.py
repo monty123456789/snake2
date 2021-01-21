@@ -65,17 +65,20 @@ class Snake:
         self.pen.penup()
         self.pen.hideturtle()
         self.pen.goto(setx, sety)
+        
 
         self.pen.write('Player {}  Score: {}'.format(self.player, self.score), align='center', font=('courier', 24, 'normal'))
 
-        
     
-    def move(self,forward_key, back_key, left_key, right_key):
+    
+    def move(self, left_key, right_key):
+        #self.head.speed()
+        self.head.forward(3)
         self.sc = Screen()
         self.sc.listen()
 
-        self.sc.onkey(self.forward,forward_key)
-        self.sc.onkey(self.backward, back_key)
+        #self.sc.onkey(self.forward,forward_key)
+        #self.sc.onkey(self.backward, back_key)
         ####self.sc.onkey(self.backward, 'Down')
         self.sc.onkey(self.left, left_key)
         self.sc.onkey(self.right, right_key)
@@ -83,11 +86,11 @@ class Snake:
 
         #self.showturtle()
 
-    def forward(self):
-        self.head.forward(self.distance)
+    #def forward(self):
+        #self.head.forward(self.distance)
 
-    def backward(self):
-        self.head.forward(self.distance * 5)
+    #def backward(self):
+        #self.head.forward(self.distance * 5)
 
     def left(self):
         self.head.left(self.turn)
@@ -137,22 +140,24 @@ class Snake:
             self.score += 10 
             self.pen.clear()
             
+
             y = self.random.randint(-290, 290)
             x = self.random.randint(-290, 290)
             self.food.goto(x,y)
 
             self.pen.write('Player {}  Score: {}'.format(self.player, self.score), align='center', font=('courier', 24, 'normal'))
             
-            if self.score > 95:
+            if self.score > 45:
                 #self.pen.clear()
                 self.pen.goto(0,0)
                 self.pen.color('black')
                 self.pen.write('Player {}  is the winner!'.format(self.player), align='center', font=('courier', 30, 'bold'))
                 wn.mainloop()
             #self.pen.clear()
-    #def main(self):
+            # 
+    
         #self.sc.mainloop()
-yellow = Snake((-20,20), 'yellow', '1', -150, 260, (100, 0))
+yellow = Snake((-20,20), 'red', '1', -150, 260, (100, 0))
 
 blue = Snake((20,20), 'blue', '2', 150, 260, (-100, 0))
 
@@ -161,15 +166,18 @@ while True:
     wn.update()
 
     #red = Snake((20, -20), 'red', 'w', 's', 'a', 'd')
-    yellow.move('w', 's', 'a', 'd')
+    yellow.move('a', 'd')
     
     yellow.border_c()
-    blue.move('i', 'k', 'j', 'l')
+    blue.move('j', 'l')
     #blue.change()
     #blue.test_m()
     blue.border_c()
     yellow.scores()
     blue.scores()
+    ##yellow.forw()
+
+   # blue.forw()
     #yellow.food_c()
     #blue.food_c()
     #blue.border_c()
