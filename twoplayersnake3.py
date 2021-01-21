@@ -6,7 +6,7 @@ import random
 
 
 
-delay = 0.1
+
 
 
 #score = 0
@@ -14,8 +14,8 @@ high_score = 0
 
 wn = Screen()
 wn.title('Snake Game')
-wn.bgcolor('green')
-wn.setup(width=600, height=600)
+#wn.bgcolor(0.25,0.11,0.25)
+wn.setup(width=800, height=800)
 #wn.tracer(0)
 
 segments = []
@@ -36,8 +36,11 @@ high_score = 0
 class Snake:
     def __init__(self, goto, color, player, setx, sety, foodgoto):
         self.head = Turtle()
+        self.sc = Screen()
+        self.sc.bgcolor('purple')
         #super().__init__(shape='square')
         self.head.color(color)
+        self.delay = 0
 
         #self.head._outlinewidth(2)
         self.head.fillcolor('white')
@@ -55,7 +58,7 @@ class Snake:
         #self.turn = 90
 
         self.food = turtle.Turtle()
-        self.food.penup()
+        #self.food.penup()
 
         self.food.goto(foodgoto)
         self.food.speed(0)
@@ -69,6 +72,7 @@ class Snake:
         self.new_food.goto(400,400)
         self.new_food.shape('circle')
         self.new_food.color(color)
+        
         
 
         #self.score = score
@@ -93,7 +97,7 @@ class Snake:
     def move(self, left_key, right_key, up_key, down_key):
         #self.head.speed()
         #self.head.forward(10)
-        self.sc = Screen()
+        #self.sc = Screen()
         self.sc.listen()
 
         self.sc.onkey(self.up, up_key)
@@ -108,19 +112,19 @@ class Snake:
     def turn(self):
         if self.head.direction == 'left':
             l = self.head.xcor()
-            self.head.setx(l - 10)
+            self.head.setx(l - 20)
 
         if self.head.direction == 'right':
             r = self.head.xcor()
-            self.head.setx(r + 10)
+            self.head.setx(r + 20)
 
         if self.head.direction == 'up':
             u = self.head.ycor()
-            self.head.sety(u + 10)
+            self.head.sety(u + 20)
 
         if self.head.direction == 'down':
             d = self.head.ycor()
-            self.head.sety(d - 10)
+            self.head.sety(d - 20)
     #def forward(self):
         #self.head.forward(self.distance)
 
@@ -144,7 +148,7 @@ class Snake:
         self.head.direction = 'down'
 
     def border_c(self):
-        if self.head.xcor()>290 or self.head.xcor()<-290 or self.head.ycor()>290 or self.head.ycor()<-290:
+        if self.head.xcor()>390 or self.head.xcor()<-390 or self.head.ycor()>390 or self.head.ycor()<-390:
             self.head.pensize(1)
             
 
@@ -182,15 +186,26 @@ class Snake:
         self.random = random
         #self.food = food
         if self.head.distance(self.food) < 20 or self.head.distance(self.new_food) < 20:
+            #self.head.speed(2)
+           
+           
+           
             p = self.head.pensize()
             new = p + 3
             self.head.pensize(new)
             self.score += 10 
             self.pen.clear()
+            self.food.goto(0,0)
             #self.head.speed(self.head.speed-1)
 
-            y = self.random.randint(-290, 290)
-            x = self.random.randint(-290, 290)
+            y = self.random.randint(-390, 390)
+            x = self.random.randint(-390, 390)
+
+           # r = self.random.random()
+            #b = self.random.random()
+            #g = self.random.random()
+           # self.sc.bgcolor(r,b,g)
+
 
             self.food.goto(x,y)
 
@@ -204,7 +219,7 @@ class Snake:
 
             self.pen.write('Player {}  Score: {}'.format(self.player, self.score), align='center', font=('courier', 24, 'normal'))
             
-            if self.score > 5:
+            if self.score > 95:
                 #self.pen.clear()
                 self.pen.goto(0,0)
                 
